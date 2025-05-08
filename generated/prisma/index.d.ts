@@ -4839,8 +4839,8 @@ export namespace Prisma {
     description: string
     image?: string | null
     starting_price: number
-    published_on: Date | string
-    end_date: Date | string
+    published_on?: Date | string
+    end_date?: Date | string
     active: boolean
     author: UserCreateNestedOneWithoutAuctionsInput
   }
@@ -4851,8 +4851,8 @@ export namespace Prisma {
     description: string
     image?: string | null
     starting_price: number
-    published_on: Date | string
-    end_date: Date | string
+    published_on?: Date | string
+    end_date?: Date | string
     active: boolean
     authorId: string
   }
@@ -4887,8 +4887,8 @@ export namespace Prisma {
     description: string
     image?: string | null
     starting_price: number
-    published_on: Date | string
-    end_date: Date | string
+    published_on?: Date | string
+    end_date?: Date | string
     active: boolean
     authorId: string
   }
@@ -4919,14 +4919,14 @@ export namespace Prisma {
   export type BidCreateInput = {
     id?: string
     offer: number
-    published_on: Date | string
+    published_on?: Date | string
     author: UserCreateNestedOneWithoutBidsInput
   }
 
   export type BidUncheckedCreateInput = {
     id?: string
     offer: number
-    published_on: Date | string
+    published_on?: Date | string
     authorId: string
   }
 
@@ -4947,7 +4947,7 @@ export namespace Prisma {
   export type BidCreateManyInput = {
     id?: string
     offer: number
-    published_on: Date | string
+    published_on?: Date | string
     authorId: string
   }
 
@@ -5516,8 +5516,8 @@ export namespace Prisma {
     description: string
     image?: string | null
     starting_price: number
-    published_on: Date | string
-    end_date: Date | string
+    published_on?: Date | string
+    end_date?: Date | string
     active: boolean
   }
 
@@ -5527,8 +5527,8 @@ export namespace Prisma {
     description: string
     image?: string | null
     starting_price: number
-    published_on: Date | string
-    end_date: Date | string
+    published_on?: Date | string
+    end_date?: Date | string
     active: boolean
   }
 
@@ -5545,13 +5545,13 @@ export namespace Prisma {
   export type BidCreateWithoutAuthorInput = {
     id?: string
     offer: number
-    published_on: Date | string
+    published_on?: Date | string
   }
 
   export type BidUncheckedCreateWithoutAuthorInput = {
     id?: string
     offer: number
-    published_on: Date | string
+    published_on?: Date | string
   }
 
   export type BidCreateOrConnectWithoutAuthorInput = {
@@ -5739,15 +5739,15 @@ export namespace Prisma {
     description: string
     image?: string | null
     starting_price: number
-    published_on: Date | string
-    end_date: Date | string
+    published_on?: Date | string
+    end_date?: Date | string
     active: boolean
   }
 
   export type BidCreateManyAuthorInput = {
     id?: string
     offer: number
-    published_on: Date | string
+    published_on?: Date | string
   }
 
   export type AuctionUpdateWithoutAuthorInput = {

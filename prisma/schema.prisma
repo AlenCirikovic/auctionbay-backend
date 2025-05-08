@@ -32,8 +32,8 @@ model Auction {
   description String
   image String?
   starting_price Int
-  published_on DateTime
-  end_date DateTime
+  published_on DateTime @default(now())
+  end_date DateTime @updatedAt
   active Boolean
   author User @relation(fields: [authorId], references: [id])
   authorId String
@@ -42,7 +42,7 @@ model Auction {
 model Bid {
   id String @id @default(uuid())
   offer Int 
-  published_on DateTime
+  published_on DateTime @default(now())
   author User @relation(fields: [authorId], references: [id])
   authorId String
 }

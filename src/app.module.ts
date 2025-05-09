@@ -6,6 +6,9 @@ import { UsersModule } from './modules/users/users.module';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuctionModule } from './modules/auction/auction.module';
+import { BidController } from './modules/bid/bid.controller';
+import { BidService } from './modules/bid/bid.service';
+import { BidModule } from './modules/bid/bid.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -15,8 +18,9 @@ import { AuctionModule } from './modules/auction/auction.module';
     DatabaseModule,
     AuthModule,
     AuctionModule,
+    BidModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, BidController],
+  providers: [AppService, BidService],
 })
 export class AppModule { }

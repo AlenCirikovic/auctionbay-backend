@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma, User } from 'generated/prisma';
 import { PrismaService } from '../../database/prisma.service';
 
@@ -14,12 +14,15 @@ export class UsersService {
         )
     }
 
-    async findOne(id: string) : Promise<User | null>{
+    async findOne(id: string) : Promise<User>{
         const user = await this.prismaService.user.findUnique({
             where: {
                 id,
             }
         })
+        if(!user){
+            throw new BadRequestException('No user found')
+        }
         return user
     }
 
@@ -41,6 +44,12 @@ export class UsersService {
             data: updateUserDto
         })
     }
+
+      async updateUserImageId(id: string, avatar: string): Promise<User> {
+        const user = await this.findOne(id)
+        return this.update(user.id, { avatar })
+  }
+
 
     async remove(id: string) {
         return this.prismaService.user.delete({

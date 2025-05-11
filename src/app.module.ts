@@ -10,6 +10,7 @@ import { BidController } from './modules/bid/bid.controller';
 import { BidService } from './modules/bid/bid.service';
 import { BidModule } from './modules/bid/bid.module';
 
+
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true, // Don't need to import ConfigModule in other modules because it's now added in the global scope.

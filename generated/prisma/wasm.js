@@ -142,7 +142,8 @@ exports.Prisma.BidScalarFieldEnum = {
   id: 'id',
   offer: 'offer',
   published_on: 'published_on',
-  authorId: 'authorId'
+  authorId: 'authorId',
+  auctionId: 'auctionId'
 };
 
 exports.Prisma.SortOrder = {

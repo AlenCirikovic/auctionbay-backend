@@ -1087,6 +1087,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AuctionCountOutputType
+   */
+
+  export type AuctionCountOutputType = {
+    bids: number
+  }
+
+  export type AuctionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bids?: boolean | AuctionCountOutputTypeCountBidsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AuctionCountOutputType without action
+   */
+  export type AuctionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuctionCountOutputType
+     */
+    select?: AuctionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AuctionCountOutputType without action
+   */
+  export type AuctionCountOutputTypeCountBidsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BidWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2432,6 +2463,8 @@ export namespace Prisma {
     active?: boolean
     authorId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
+    bids?: boolean | Auction$bidsArgs<ExtArgs>
+    _count?: boolean | AuctionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auction"]>
 
   export type AuctionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2475,6 +2508,8 @@ export namespace Prisma {
   export type AuctionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "image" | "starting_price" | "published_on" | "end_date" | "active" | "authorId", ExtArgs["result"]["auction"]>
   export type AuctionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
+    bids?: boolean | Auction$bidsArgs<ExtArgs>
+    _count?: boolean | AuctionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AuctionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -2487,6 +2522,7 @@ export namespace Prisma {
     name: "Auction"
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
+      bids: Prisma.$BidPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2893,6 +2929,7 @@ export namespace Prisma {
   export interface Prisma__AuctionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    bids<T extends Auction$bidsArgs<ExtArgs> = {}>(args?: Subset<T, Auction$bidsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BidPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3327,6 +3364,30 @@ export namespace Prisma {
   }
 
   /**
+   * Auction.bids
+   */
+  export type Auction$bidsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bid
+     */
+    select?: BidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bid
+     */
+    omit?: BidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BidInclude<ExtArgs> | null
+    where?: BidWhereInput
+    orderBy?: BidOrderByWithRelationInput | BidOrderByWithRelationInput[]
+    cursor?: BidWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BidScalarFieldEnum | BidScalarFieldEnum[]
+  }
+
+  /**
    * Auction without action
    */
   export type AuctionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3370,6 +3431,7 @@ export namespace Prisma {
     offer: number | null
     published_on: Date | null
     authorId: string | null
+    auctionId: string | null
   }
 
   export type BidMaxAggregateOutputType = {
@@ -3377,6 +3439,7 @@ export namespace Prisma {
     offer: number | null
     published_on: Date | null
     authorId: string | null
+    auctionId: string | null
   }
 
   export type BidCountAggregateOutputType = {
@@ -3384,6 +3447,7 @@ export namespace Prisma {
     offer: number
     published_on: number
     authorId: number
+    auctionId: number
     _all: number
   }
 
@@ -3401,6 +3465,7 @@ export namespace Prisma {
     offer?: true
     published_on?: true
     authorId?: true
+    auctionId?: true
   }
 
   export type BidMaxAggregateInputType = {
@@ -3408,6 +3473,7 @@ export namespace Prisma {
     offer?: true
     published_on?: true
     authorId?: true
+    auctionId?: true
   }
 
   export type BidCountAggregateInputType = {
@@ -3415,6 +3481,7 @@ export namespace Prisma {
     offer?: true
     published_on?: true
     authorId?: true
+    auctionId?: true
     _all?: true
   }
 
@@ -3509,6 +3576,7 @@ export namespace Prisma {
     offer: number
     published_on: Date
     authorId: string
+    auctionId: string
     _count: BidCountAggregateOutputType | null
     _avg: BidAvgAggregateOutputType | null
     _sum: BidSumAggregateOutputType | null
@@ -3535,7 +3603,9 @@ export namespace Prisma {
     offer?: boolean
     published_on?: boolean
     authorId?: boolean
+    auctionId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
+    auction?: boolean | AuctionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bid"]>
 
   export type BidSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3543,7 +3613,9 @@ export namespace Prisma {
     offer?: boolean
     published_on?: boolean
     authorId?: boolean
+    auctionId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
+    auction?: boolean | AuctionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bid"]>
 
   export type BidSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3551,7 +3623,9 @@ export namespace Prisma {
     offer?: boolean
     published_on?: boolean
     authorId?: boolean
+    auctionId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
+    auction?: boolean | AuctionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bid"]>
 
   export type BidSelectScalar = {
@@ -3559,29 +3633,35 @@ export namespace Prisma {
     offer?: boolean
     published_on?: boolean
     authorId?: boolean
+    auctionId?: boolean
   }
 
-  export type BidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "offer" | "published_on" | "authorId", ExtArgs["result"]["bid"]>
+  export type BidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "offer" | "published_on" | "authorId" | "auctionId", ExtArgs["result"]["bid"]>
   export type BidInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
+    auction?: boolean | AuctionDefaultArgs<ExtArgs>
   }
   export type BidIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
+    auction?: boolean | AuctionDefaultArgs<ExtArgs>
   }
   export type BidIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
+    auction?: boolean | AuctionDefaultArgs<ExtArgs>
   }
 
   export type $BidPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Bid"
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
+      auction: Prisma.$AuctionPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       offer: number
       published_on: Date
       authorId: string
+      auctionId: string
     }, ExtArgs["result"]["bid"]>
     composites: {}
   }
@@ -3977,6 +4057,7 @@ export namespace Prisma {
   export interface Prisma__BidClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    auction<T extends AuctionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AuctionDefaultArgs<ExtArgs>>): Prisma__AuctionClient<$Result.GetResult<Prisma.$AuctionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4010,6 +4091,7 @@ export namespace Prisma {
     readonly offer: FieldRef<"Bid", 'Int'>
     readonly published_on: FieldRef<"Bid", 'DateTime'>
     readonly authorId: FieldRef<"Bid", 'String'>
+    readonly auctionId: FieldRef<"Bid", 'String'>
   }
     
 
@@ -4469,7 +4551,8 @@ export namespace Prisma {
     id: 'id',
     offer: 'offer',
     published_on: 'published_on',
-    authorId: 'authorId'
+    authorId: 'authorId',
+    auctionId: 'auctionId'
   };
 
   export type BidScalarFieldEnum = (typeof BidScalarFieldEnum)[keyof typeof BidScalarFieldEnum]
@@ -4647,6 +4730,7 @@ export namespace Prisma {
     active?: BoolFilter<"Auction"> | boolean
     authorId?: StringFilter<"Auction"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    bids?: BidListRelationFilter
   }
 
   export type AuctionOrderByWithRelationInput = {
@@ -4660,6 +4744,7 @@ export namespace Prisma {
     active?: SortOrder
     authorId?: SortOrder
     author?: UserOrderByWithRelationInput
+    bids?: BidOrderByRelationAggregateInput
   }
 
   export type AuctionWhereUniqueInput = Prisma.AtLeast<{
@@ -4676,6 +4761,7 @@ export namespace Prisma {
     active?: BoolFilter<"Auction"> | boolean
     authorId?: StringFilter<"Auction"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    bids?: BidListRelationFilter
   }, "id">
 
   export type AuctionOrderByWithAggregationInput = {
@@ -4718,7 +4804,9 @@ export namespace Prisma {
     offer?: IntFilter<"Bid"> | number
     published_on?: DateTimeFilter<"Bid"> | Date | string
     authorId?: StringFilter<"Bid"> | string
+    auctionId?: StringFilter<"Bid"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    auction?: XOR<AuctionScalarRelationFilter, AuctionWhereInput>
   }
 
   export type BidOrderByWithRelationInput = {
@@ -4726,7 +4814,9 @@ export namespace Prisma {
     offer?: SortOrder
     published_on?: SortOrder
     authorId?: SortOrder
+    auctionId?: SortOrder
     author?: UserOrderByWithRelationInput
+    auction?: AuctionOrderByWithRelationInput
   }
 
   export type BidWhereUniqueInput = Prisma.AtLeast<{
@@ -4737,7 +4827,9 @@ export namespace Prisma {
     offer?: IntFilter<"Bid"> | number
     published_on?: DateTimeFilter<"Bid"> | Date | string
     authorId?: StringFilter<"Bid"> | string
+    auctionId?: StringFilter<"Bid"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    auction?: XOR<AuctionScalarRelationFilter, AuctionWhereInput>
   }, "id">
 
   export type BidOrderByWithAggregationInput = {
@@ -4745,6 +4837,7 @@ export namespace Prisma {
     offer?: SortOrder
     published_on?: SortOrder
     authorId?: SortOrder
+    auctionId?: SortOrder
     _count?: BidCountOrderByAggregateInput
     _avg?: BidAvgOrderByAggregateInput
     _max?: BidMaxOrderByAggregateInput
@@ -4760,6 +4853,7 @@ export namespace Prisma {
     offer?: IntWithAggregatesFilter<"Bid"> | number
     published_on?: DateTimeWithAggregatesFilter<"Bid"> | Date | string
     authorId?: StringWithAggregatesFilter<"Bid"> | string
+    auctionId?: StringWithAggregatesFilter<"Bid"> | string
   }
 
   export type UserCreateInput = {
@@ -4840,9 +4934,10 @@ export namespace Prisma {
     image?: string | null
     starting_price: number
     published_on?: Date | string
-    end_date?: Date | string
+    end_date: Date | string
     active: boolean
     author: UserCreateNestedOneWithoutAuctionsInput
+    bids?: BidCreateNestedManyWithoutAuctionInput
   }
 
   export type AuctionUncheckedCreateInput = {
@@ -4852,9 +4947,10 @@ export namespace Prisma {
     image?: string | null
     starting_price: number
     published_on?: Date | string
-    end_date?: Date | string
+    end_date: Date | string
     active: boolean
     authorId: string
+    bids?: BidUncheckedCreateNestedManyWithoutAuctionInput
   }
 
   export type AuctionUpdateInput = {
@@ -4867,6 +4963,7 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
     author?: UserUpdateOneRequiredWithoutAuctionsNestedInput
+    bids?: BidUpdateManyWithoutAuctionNestedInput
   }
 
   export type AuctionUncheckedUpdateInput = {
@@ -4879,6 +4976,7 @@ export namespace Prisma {
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
     authorId?: StringFieldUpdateOperationsInput | string
+    bids?: BidUncheckedUpdateManyWithoutAuctionNestedInput
   }
 
   export type AuctionCreateManyInput = {
@@ -4888,7 +4986,7 @@ export namespace Prisma {
     image?: string | null
     starting_price: number
     published_on?: Date | string
-    end_date?: Date | string
+    end_date: Date | string
     active: boolean
     authorId: string
   }
@@ -4921,6 +5019,7 @@ export namespace Prisma {
     offer: number
     published_on?: Date | string
     author: UserCreateNestedOneWithoutBidsInput
+    auction: AuctionCreateNestedOneWithoutBidsInput
   }
 
   export type BidUncheckedCreateInput = {
@@ -4928,6 +5027,7 @@ export namespace Prisma {
     offer: number
     published_on?: Date | string
     authorId: string
+    auctionId: string
   }
 
   export type BidUpdateInput = {
@@ -4935,6 +5035,7 @@ export namespace Prisma {
     offer?: IntFieldUpdateOperationsInput | number
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutBidsNestedInput
+    auction?: AuctionUpdateOneRequiredWithoutBidsNestedInput
   }
 
   export type BidUncheckedUpdateInput = {
@@ -4942,6 +5043,7 @@ export namespace Prisma {
     offer?: IntFieldUpdateOperationsInput | number
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    auctionId?: StringFieldUpdateOperationsInput | string
   }
 
   export type BidCreateManyInput = {
@@ -4949,6 +5051,7 @@ export namespace Prisma {
     offer: number
     published_on?: Date | string
     authorId: string
+    auctionId: string
   }
 
   export type BidUpdateManyMutationInput = {
@@ -4962,6 +5065,7 @@ export namespace Prisma {
     offer?: IntFieldUpdateOperationsInput | number
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    auctionId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5196,11 +5300,17 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type AuctionScalarRelationFilter = {
+    is?: AuctionWhereInput
+    isNot?: AuctionWhereInput
+  }
+
   export type BidCountOrderByAggregateInput = {
     id?: SortOrder
     offer?: SortOrder
     published_on?: SortOrder
     authorId?: SortOrder
+    auctionId?: SortOrder
   }
 
   export type BidAvgOrderByAggregateInput = {
@@ -5212,6 +5322,7 @@ export namespace Prisma {
     offer?: SortOrder
     published_on?: SortOrder
     authorId?: SortOrder
+    auctionId?: SortOrder
   }
 
   export type BidMinOrderByAggregateInput = {
@@ -5219,6 +5330,7 @@ export namespace Prisma {
     offer?: SortOrder
     published_on?: SortOrder
     authorId?: SortOrder
+    auctionId?: SortOrder
   }
 
   export type BidSumOrderByAggregateInput = {
@@ -5323,6 +5435,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type BidCreateNestedManyWithoutAuctionInput = {
+    create?: XOR<BidCreateWithoutAuctionInput, BidUncheckedCreateWithoutAuctionInput> | BidCreateWithoutAuctionInput[] | BidUncheckedCreateWithoutAuctionInput[]
+    connectOrCreate?: BidCreateOrConnectWithoutAuctionInput | BidCreateOrConnectWithoutAuctionInput[]
+    createMany?: BidCreateManyAuctionInputEnvelope
+    connect?: BidWhereUniqueInput | BidWhereUniqueInput[]
+  }
+
+  export type BidUncheckedCreateNestedManyWithoutAuctionInput = {
+    create?: XOR<BidCreateWithoutAuctionInput, BidUncheckedCreateWithoutAuctionInput> | BidCreateWithoutAuctionInput[] | BidUncheckedCreateWithoutAuctionInput[]
+    connectOrCreate?: BidCreateOrConnectWithoutAuctionInput | BidCreateOrConnectWithoutAuctionInput[]
+    createMany?: BidCreateManyAuctionInputEnvelope
+    connect?: BidWhereUniqueInput | BidWhereUniqueInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -5347,10 +5473,44 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuctionsInput, UserUpdateWithoutAuctionsInput>, UserUncheckedUpdateWithoutAuctionsInput>
   }
 
+  export type BidUpdateManyWithoutAuctionNestedInput = {
+    create?: XOR<BidCreateWithoutAuctionInput, BidUncheckedCreateWithoutAuctionInput> | BidCreateWithoutAuctionInput[] | BidUncheckedCreateWithoutAuctionInput[]
+    connectOrCreate?: BidCreateOrConnectWithoutAuctionInput | BidCreateOrConnectWithoutAuctionInput[]
+    upsert?: BidUpsertWithWhereUniqueWithoutAuctionInput | BidUpsertWithWhereUniqueWithoutAuctionInput[]
+    createMany?: BidCreateManyAuctionInputEnvelope
+    set?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    disconnect?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    delete?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    connect?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    update?: BidUpdateWithWhereUniqueWithoutAuctionInput | BidUpdateWithWhereUniqueWithoutAuctionInput[]
+    updateMany?: BidUpdateManyWithWhereWithoutAuctionInput | BidUpdateManyWithWhereWithoutAuctionInput[]
+    deleteMany?: BidScalarWhereInput | BidScalarWhereInput[]
+  }
+
+  export type BidUncheckedUpdateManyWithoutAuctionNestedInput = {
+    create?: XOR<BidCreateWithoutAuctionInput, BidUncheckedCreateWithoutAuctionInput> | BidCreateWithoutAuctionInput[] | BidUncheckedCreateWithoutAuctionInput[]
+    connectOrCreate?: BidCreateOrConnectWithoutAuctionInput | BidCreateOrConnectWithoutAuctionInput[]
+    upsert?: BidUpsertWithWhereUniqueWithoutAuctionInput | BidUpsertWithWhereUniqueWithoutAuctionInput[]
+    createMany?: BidCreateManyAuctionInputEnvelope
+    set?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    disconnect?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    delete?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    connect?: BidWhereUniqueInput | BidWhereUniqueInput[]
+    update?: BidUpdateWithWhereUniqueWithoutAuctionInput | BidUpdateWithWhereUniqueWithoutAuctionInput[]
+    updateMany?: BidUpdateManyWithWhereWithoutAuctionInput | BidUpdateManyWithWhereWithoutAuctionInput[]
+    deleteMany?: BidScalarWhereInput | BidScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutBidsInput = {
     create?: XOR<UserCreateWithoutBidsInput, UserUncheckedCreateWithoutBidsInput>
     connectOrCreate?: UserCreateOrConnectWithoutBidsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type AuctionCreateNestedOneWithoutBidsInput = {
+    create?: XOR<AuctionCreateWithoutBidsInput, AuctionUncheckedCreateWithoutBidsInput>
+    connectOrCreate?: AuctionCreateOrConnectWithoutBidsInput
+    connect?: AuctionWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutBidsNestedInput = {
@@ -5359,6 +5519,14 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutBidsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBidsInput, UserUpdateWithoutBidsInput>, UserUncheckedUpdateWithoutBidsInput>
+  }
+
+  export type AuctionUpdateOneRequiredWithoutBidsNestedInput = {
+    create?: XOR<AuctionCreateWithoutBidsInput, AuctionUncheckedCreateWithoutBidsInput>
+    connectOrCreate?: AuctionCreateOrConnectWithoutBidsInput
+    upsert?: AuctionUpsertWithoutBidsInput
+    connect?: AuctionWhereUniqueInput
+    update?: XOR<XOR<AuctionUpdateToOneWithWhereWithoutBidsInput, AuctionUpdateWithoutBidsInput>, AuctionUncheckedUpdateWithoutBidsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5517,8 +5685,9 @@ export namespace Prisma {
     image?: string | null
     starting_price: number
     published_on?: Date | string
-    end_date?: Date | string
+    end_date: Date | string
     active: boolean
+    bids?: BidCreateNestedManyWithoutAuctionInput
   }
 
   export type AuctionUncheckedCreateWithoutAuthorInput = {
@@ -5528,8 +5697,9 @@ export namespace Prisma {
     image?: string | null
     starting_price: number
     published_on?: Date | string
-    end_date?: Date | string
+    end_date: Date | string
     active: boolean
+    bids?: BidUncheckedCreateNestedManyWithoutAuctionInput
   }
 
   export type AuctionCreateOrConnectWithoutAuthorInput = {
@@ -5546,12 +5716,14 @@ export namespace Prisma {
     id?: string
     offer: number
     published_on?: Date | string
+    auction: AuctionCreateNestedOneWithoutBidsInput
   }
 
   export type BidUncheckedCreateWithoutAuthorInput = {
     id?: string
     offer: number
     published_on?: Date | string
+    auctionId: string
   }
 
   export type BidCreateOrConnectWithoutAuthorInput = {
@@ -5619,6 +5791,7 @@ export namespace Prisma {
     offer?: IntFilter<"Bid"> | number
     published_on?: DateTimeFilter<"Bid"> | Date | string
     authorId?: StringFilter<"Bid"> | string
+    auctionId?: StringFilter<"Bid"> | string
   }
 
   export type UserCreateWithoutAuctionsInput = {
@@ -5644,6 +5817,30 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutAuctionsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutAuctionsInput, UserUncheckedCreateWithoutAuctionsInput>
+  }
+
+  export type BidCreateWithoutAuctionInput = {
+    id?: string
+    offer: number
+    published_on?: Date | string
+    author: UserCreateNestedOneWithoutBidsInput
+  }
+
+  export type BidUncheckedCreateWithoutAuctionInput = {
+    id?: string
+    offer: number
+    published_on?: Date | string
+    authorId: string
+  }
+
+  export type BidCreateOrConnectWithoutAuctionInput = {
+    where: BidWhereUniqueInput
+    create: XOR<BidCreateWithoutAuctionInput, BidUncheckedCreateWithoutAuctionInput>
+  }
+
+  export type BidCreateManyAuctionInputEnvelope = {
+    data: BidCreateManyAuctionInput | BidCreateManyAuctionInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutAuctionsInput = {
@@ -5677,6 +5874,22 @@ export namespace Prisma {
     bids?: BidUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
+  export type BidUpsertWithWhereUniqueWithoutAuctionInput = {
+    where: BidWhereUniqueInput
+    update: XOR<BidUpdateWithoutAuctionInput, BidUncheckedUpdateWithoutAuctionInput>
+    create: XOR<BidCreateWithoutAuctionInput, BidUncheckedCreateWithoutAuctionInput>
+  }
+
+  export type BidUpdateWithWhereUniqueWithoutAuctionInput = {
+    where: BidWhereUniqueInput
+    data: XOR<BidUpdateWithoutAuctionInput, BidUncheckedUpdateWithoutAuctionInput>
+  }
+
+  export type BidUpdateManyWithWhereWithoutAuctionInput = {
+    where: BidScalarWhereInput
+    data: XOR<BidUpdateManyMutationInput, BidUncheckedUpdateManyWithoutAuctionInput>
+  }
+
   export type UserCreateWithoutBidsInput = {
     id?: string
     email: string
@@ -5700,6 +5913,35 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutBidsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutBidsInput, UserUncheckedCreateWithoutBidsInput>
+  }
+
+  export type AuctionCreateWithoutBidsInput = {
+    id?: string
+    title: string
+    description: string
+    image?: string | null
+    starting_price: number
+    published_on?: Date | string
+    end_date: Date | string
+    active: boolean
+    author: UserCreateNestedOneWithoutAuctionsInput
+  }
+
+  export type AuctionUncheckedCreateWithoutBidsInput = {
+    id?: string
+    title: string
+    description: string
+    image?: string | null
+    starting_price: number
+    published_on?: Date | string
+    end_date: Date | string
+    active: boolean
+    authorId: string
+  }
+
+  export type AuctionCreateOrConnectWithoutBidsInput = {
+    where: AuctionWhereUniqueInput
+    create: XOR<AuctionCreateWithoutBidsInput, AuctionUncheckedCreateWithoutBidsInput>
   }
 
   export type UserUpsertWithoutBidsInput = {
@@ -5733,6 +5975,41 @@ export namespace Prisma {
     auctions?: AuctionUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
+  export type AuctionUpsertWithoutBidsInput = {
+    update: XOR<AuctionUpdateWithoutBidsInput, AuctionUncheckedUpdateWithoutBidsInput>
+    create: XOR<AuctionCreateWithoutBidsInput, AuctionUncheckedCreateWithoutBidsInput>
+    where?: AuctionWhereInput
+  }
+
+  export type AuctionUpdateToOneWithWhereWithoutBidsInput = {
+    where?: AuctionWhereInput
+    data: XOR<AuctionUpdateWithoutBidsInput, AuctionUncheckedUpdateWithoutBidsInput>
+  }
+
+  export type AuctionUpdateWithoutBidsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    starting_price?: IntFieldUpdateOperationsInput | number
+    published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    author?: UserUpdateOneRequiredWithoutAuctionsNestedInput
+  }
+
+  export type AuctionUncheckedUpdateWithoutBidsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    starting_price?: IntFieldUpdateOperationsInput | number
+    published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type AuctionCreateManyAuthorInput = {
     id?: string
     title: string
@@ -5740,7 +6017,7 @@ export namespace Prisma {
     image?: string | null
     starting_price: number
     published_on?: Date | string
-    end_date?: Date | string
+    end_date: Date | string
     active: boolean
   }
 
@@ -5748,6 +6025,7 @@ export namespace Prisma {
     id?: string
     offer: number
     published_on?: Date | string
+    auctionId: string
   }
 
   export type AuctionUpdateWithoutAuthorInput = {
@@ -5759,6 +6037,7 @@ export namespace Prisma {
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    bids?: BidUpdateManyWithoutAuctionNestedInput
   }
 
   export type AuctionUncheckedUpdateWithoutAuthorInput = {
@@ -5770,6 +6049,7 @@ export namespace Prisma {
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
     end_date?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    bids?: BidUncheckedUpdateManyWithoutAuctionNestedInput
   }
 
   export type AuctionUncheckedUpdateManyWithoutAuthorInput = {
@@ -5787,18 +6067,49 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     offer?: IntFieldUpdateOperationsInput | number
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    auction?: AuctionUpdateOneRequiredWithoutBidsNestedInput
   }
 
   export type BidUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     offer?: IntFieldUpdateOperationsInput | number
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    auctionId?: StringFieldUpdateOperationsInput | string
   }
 
   export type BidUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     offer?: IntFieldUpdateOperationsInput | number
     published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    auctionId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BidCreateManyAuctionInput = {
+    id?: string
+    offer: number
+    published_on?: Date | string
+    authorId: string
+  }
+
+  export type BidUpdateWithoutAuctionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    offer?: IntFieldUpdateOperationsInput | number
+    published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutBidsNestedInput
+  }
+
+  export type BidUncheckedUpdateWithoutAuctionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    offer?: IntFieldUpdateOperationsInput | number
+    published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BidUncheckedUpdateManyWithoutAuctionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    offer?: IntFieldUpdateOperationsInput | number
+    published_on?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: StringFieldUpdateOperationsInput | string
   }
 
 

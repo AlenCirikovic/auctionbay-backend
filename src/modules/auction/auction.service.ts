@@ -19,7 +19,31 @@ export class AuctionService {
     }
 
     async auctions(): Promise<Auction[]>{
-        return await this.prismaService.auction.findMany()
+        return await this.prismaService.auction.findMany({
+            orderBy:{
+                end_date: "desc"
+            }
+        })
+    }
+
+    async findOne(auction_id:string): Promise<Auction | null>{
+        return await this.prismaService.auction.findUnique({
+            where:{
+                id:auction_id
+            }
+        })
+    }
+
+    async update(userId: string, auctionId: string, data: Prisma.AuctionUpdateInput){
+        return await this.prismaService.auction.update({
+            where:{
+                id:auctionId,
+                authorId: userId
+            },
+            data: {
+                ...data
+            },
+        })
     }
 
 

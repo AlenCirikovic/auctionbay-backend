@@ -14,13 +14,13 @@ export class UsersService {
         )
     }
 
-    async findOne(id: string) : Promise<User>{
+    async findOne(id: string): Promise<User> {
         const user = await this.prismaService.user.findUnique({
             where: {
                 id,
             }
         })
-        if(!user){
+        if (!user) {
             throw new BadRequestException('No user found')
         }
         return user
@@ -36,19 +36,28 @@ export class UsersService {
     }
 
 
-    async update(id: string, updateUserDto: Prisma.UserUpdateInput): Promise<User> {
+   async update(userId: string, updateUserDto: Prisma.UserUpdateInput): Promise<User> {
+        const user = await this.findOne(userId);
+        
+        const { name, surname, email, avatar } = updateUserDto;
+        
+        const updateData: Partial<Prisma.UserUpdateInput> = {};
+        
+        if (name !== undefined) updateData.name = name;
+        if (surname !== undefined) updateData.surname = surname;
+        if (email !== undefined) updateData.email = email;
+        if (avatar !== undefined) updateData.avatar = avatar;
+
         return await this.prismaService.user.update({
-            where: {
-                id,
-            },
-            data: updateUserDto
-        })
+            where: { id: userId },
+            data: updateData
+        });
     }
 
-      async updateUserImageId(id: string, avatar: string): Promise<User> {
+    async updateUserImageId(id: string, avatar: string): Promise<User> {
         const user = await this.findOne(id)
         return this.update(user.id, { avatar })
-  }
+    }
 
 
     async remove(id: string) {

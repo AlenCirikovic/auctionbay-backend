@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, HttpCode, HttpStatus, Param, Patch, Post, Req, Res, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Req, Res, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuctionService } from './auction.service';
 import { RequestWithUser } from 'src/interfaces/auth.interface';
 import { Auction, Prisma } from 'generated/prisma';
@@ -21,21 +21,13 @@ export class AuctionController {
 
     }
 
-    @Post('upload/:id')
-    @UseInterceptors(FileInterceptor('image', saveImageToStorage))
-    @HttpCode(HttpStatus.CREATED)
-    async upload(@Req() req: RequestWithUser, @UploadedFile() file: Express.Multer.File, @Param('id') auctionId: string): Promise<Auction> {
-        const filename = file?.filename
-        if (!filename) throw new BadRequestException('File must be a png, jpg or jpeg')
-        const imagesFolderPath = join(process.cwd(), 'files')
-        const fullImagePath = join(imagesFolderPath + '/' + file.filename)
-        if (await isFileExtensionSafe(fullImagePath)) {
-            return this.auctionService.updateAuctionImage(req.user.id,auctionId, filename)
-        }
-        removeFile(fullImagePath)
-        throw new BadRequestException('File content does not match extension!')
+    @Get('others')
+    @UseGuards(JwtAuthGuard)
+    @HttpCode(HttpStatus.OK)
+    async getOtherUsersAuctions(@Req() req: RequestWithUser) {
+        const userId = req.user.id;
+        return this.auctionService.getOtherUsersAuctions(userId);
     }
-
 
     @Get('auctions')
     @HttpCode(HttpStatus.OK)
@@ -43,12 +35,65 @@ export class AuctionController {
         return await this.auctionService.auctions()
     }
 
+    @Get('me')
+    @UseGuards(JwtAuthGuard)
+    @HttpCode(HttpStatus.OK)
+    async findMany(@Req() req: RequestWithUser): Promise<Auction[]> {
+        console.log(`REQ TOKEN ${req.user}`)
+        return await this.auctionService.findMany(req.user.id)
+    }
+
+    @Get('won')
+    @UseGuards(JwtAuthGuard)
+    @HttpCode(HttpStatus.OK)
+    async findWonAuctions(@Req() req: RequestWithUser): Promise<Auction[]> {
+        return await this.auctionService.findWonAuctions(req.user.id);
+    }
+
+    @Get('bidded')
+    @UseGuards(JwtAuthGuard)
+    @HttpCode(HttpStatus.OK)
+    async findBidOnAuctions(@Req() req: RequestWithUser): Promise<Auction[]> {
+        return await this.auctionService.findBidOnAuctions(req.user.id);
+        
+    }
+
+    @Delete(':id/force')
+    @UseGuards(JwtAuthGuard)
+    @HttpCode(HttpStatus.OK)
+    async forceDeleteAuction(@Param('id') auctionId: string,@Req() req: RequestWithUser) {
+        const userId = req.user.id;
+        return await this.auctionService.forceDelete(userId, auctionId);
+    }
+
+    @Post('upload/:id')
+    @UseInterceptors(FileInterceptor('image', saveImageToStorage))
+    @UseGuards(JwtAuthGuard)
+    @HttpCode(HttpStatus.CREATED)
+    async upload(@Req() req: RequestWithUser, @UploadedFile() file: Express.Multer.File, @Param('id') auctionId: string): Promise<Auction> {
+        const filename = file?.filename
+        if (!filename) throw new BadRequestException('File must be a png, jpg or jpeg')
+        const imagesFolderPath = join(process.cwd(), 'files')
+        const fullImagePath = join(imagesFolderPath + '/' + file.filename)
+        if (await isFileExtensionSafe(fullImagePath)) {
+            return this.auctionService.updateAuctionImage(req.user.id, auctionId, filename)
+        }
+        removeFile(fullImagePath)
+        throw new BadRequestException('File content does not match extension!')
+    }
 
     @Get(':id')
     @HttpCode(HttpStatus.OK)
-    async auction(@Param('id') id: string): Promise<Auction | null> {
-        return await this.auctionService.findOne(id)
+    async getAuctionWithBids(@Param('id') id: string): Promise<Auction> {
+        return await this.auctionService.findAuctionWithBids(id);
     }
+
+
+    // @Get(':id')
+    // @HttpCode(HttpStatus.OK)
+    // async auction(@Param('id') id: string): Promise<Auction | null> {
+    //     return await this.auctionService.findOne(id)
+    // }
 
     @Patch('/me/auction/:id')
     @HttpCode(HttpStatus.OK)

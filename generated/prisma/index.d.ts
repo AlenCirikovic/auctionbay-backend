@@ -1265,7 +1265,7 @@ export namespace Prisma {
     email: string
     name: string | null
     surname: string | null
-    avatar: string
+    avatar: string | null
     password: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1345,7 +1345,7 @@ export namespace Prisma {
       email: string
       name: string | null
       surname: string | null
-      avatar: string
+      avatar: string | null
       password: string
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -4661,7 +4661,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     name?: StringNullableFilter<"User"> | string | null
     surname?: StringNullableFilter<"User"> | string | null
-    avatar?: StringFilter<"User"> | string
+    avatar?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     auctions?: AuctionListRelationFilter
     bids?: BidListRelationFilter
@@ -4672,7 +4672,7 @@ export namespace Prisma {
     email?: SortOrder
     name?: SortOrderInput | SortOrder
     surname?: SortOrderInput | SortOrder
-    avatar?: SortOrder
+    avatar?: SortOrderInput | SortOrder
     password?: SortOrder
     auctions?: AuctionOrderByRelationAggregateInput
     bids?: BidOrderByRelationAggregateInput
@@ -4686,7 +4686,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringNullableFilter<"User"> | string | null
     surname?: StringNullableFilter<"User"> | string | null
-    avatar?: StringFilter<"User"> | string
+    avatar?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     auctions?: AuctionListRelationFilter
     bids?: BidListRelationFilter
@@ -4697,7 +4697,7 @@ export namespace Prisma {
     email?: SortOrder
     name?: SortOrderInput | SortOrder
     surname?: SortOrderInput | SortOrder
-    avatar?: SortOrder
+    avatar?: SortOrderInput | SortOrder
     password?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4712,7 +4712,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     surname?: StringNullableWithAggregatesFilter<"User"> | string | null
-    avatar?: StringWithAggregatesFilter<"User"> | string
+    avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
   }
 
@@ -4861,7 +4861,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     surname?: string | null
-    avatar: string
+    avatar?: string | null
     password: string
     auctions?: AuctionCreateNestedManyWithoutAuthorInput
     bids?: BidCreateNestedManyWithoutAuthorInput
@@ -4872,7 +4872,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     surname?: string | null
-    avatar: string
+    avatar?: string | null
     password: string
     auctions?: AuctionUncheckedCreateNestedManyWithoutAuthorInput
     bids?: BidUncheckedCreateNestedManyWithoutAuthorInput
@@ -4883,7 +4883,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     auctions?: AuctionUpdateManyWithoutAuthorNestedInput
     bids?: BidUpdateManyWithoutAuthorNestedInput
@@ -4894,7 +4894,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     auctions?: AuctionUncheckedUpdateManyWithoutAuthorNestedInput
     bids?: BidUncheckedUpdateManyWithoutAuthorNestedInput
@@ -4905,7 +4905,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     surname?: string | null
-    avatar: string
+    avatar?: string | null
     password: string
   }
 
@@ -4914,7 +4914,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4923,7 +4923,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5799,7 +5799,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     surname?: string | null
-    avatar: string
+    avatar?: string | null
     password: string
     bids?: BidCreateNestedManyWithoutAuthorInput
   }
@@ -5809,7 +5809,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     surname?: string | null
-    avatar: string
+    avatar?: string | null
     password: string
     bids?: BidUncheckedCreateNestedManyWithoutAuthorInput
   }
@@ -5859,7 +5859,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     bids?: BidUpdateManyWithoutAuthorNestedInput
   }
@@ -5869,7 +5869,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     bids?: BidUncheckedUpdateManyWithoutAuthorNestedInput
   }
@@ -5895,7 +5895,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     surname?: string | null
-    avatar: string
+    avatar?: string | null
     password: string
     auctions?: AuctionCreateNestedManyWithoutAuthorInput
   }
@@ -5905,7 +5905,7 @@ export namespace Prisma {
     email: string
     name?: string | null
     surname?: string | null
-    avatar: string
+    avatar?: string | null
     password: string
     auctions?: AuctionUncheckedCreateNestedManyWithoutAuthorInput
   }
@@ -5960,7 +5960,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     auctions?: AuctionUpdateManyWithoutAuthorNestedInput
   }
@@ -5970,7 +5970,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surname?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     auctions?: AuctionUncheckedUpdateManyWithoutAuthorNestedInput
   }

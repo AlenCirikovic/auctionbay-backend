@@ -42,6 +42,7 @@ export class UsersController {
     update(@Param('id') id: string, @Body() updateProductDto: Prisma.UserUpdateInput) {
         return this.usersService.update(id, updateProductDto)
     }
+    
 
     @Delete(':id')
     remove(@Param('id') id: string) {

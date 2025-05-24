@@ -28,7 +28,6 @@ export class AuthController {
     return user;  
   }
 
-
   @UseGuards(JwtAuthGuard)
   @Patch('me/update-password')
   @HttpCode(HttpStatus.OK)
@@ -43,7 +42,7 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  async register(@Body() body: Prisma.UserCreateInput, @Res() res: Response) {
+  async register(@Body() body: Prisma.UserCreateInput) {
     return this.authService.register(body);
   }
 

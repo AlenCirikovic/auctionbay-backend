@@ -29,10 +29,14 @@ export class AuthService {
 
 
 
+
     async register(registerUserDto: Prisma.UserCreateInput) {
+        const {email,name,surname} = registerUserDto
         const hashedPassword = await hash(registerUserDto.password)
         return this.usersService.create({
-            ...registerUserDto,
+            email,
+            name,
+            surname,
             password: hashedPassword
         })
 
